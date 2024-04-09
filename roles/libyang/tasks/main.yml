@@ -2,14 +2,27 @@
 - name: Clone Libyang repository
   git:
     repo: https://github.com/CESNET/libyang.git
-    dest: /opt/libyang
+    dest: /tmp/libyang
     version: v2.1.148
 
-- name: Build and install Libyang
-  shell: |
-    cd /opt/libyang
-    mkdir build
-    cd build
-    cmake ..
-    make
-    make install
+- name: Create build directory for Libyang
+  file:
+    path: /tmp/libyang/build
+    state: directory
+
+- name: Configure Libyang build
+  command: >
+    cmake -D CMAKE_INSTALL_PREFIX:PATH=/usr
+          -D CMAKE_BUILD_TYPE:String="Release" ..
+  args:
+    chdir: /tmp/libyang/build
+
+- name: Build Libyang
+  command: make
+  args:
+    chdir: /tmp/libyang/build
+
+- name: Install Libyang
+  command: make install
+  args:
+    chdir: /tmp/libyang/build
