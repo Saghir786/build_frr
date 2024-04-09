@@ -1,0 +1,16 @@
+---
+- name: Install prerequisite packages
+  dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - gcc
+    - make
+    - git
+    - autoconf
+    - automake
+    - libtool
+    - libpcre3-devel
+    - readline-devel
+    - json-c-devel
+    - pkgconfig

@@ -1,0 +1,12 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  image: almalinux:latest
+  variables:
+    ANSIBLE_HOST_KEY_CHECKING: "False"
+  script:
+    - dnf update -y
+    - dnf install -y ansible
+    - ansible-playbook -i "localhost," -c local playbook.yml

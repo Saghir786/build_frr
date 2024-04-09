@@ -1,0 +1,15 @@
+---
+- name: Clone Libyang repository
+  git:
+    repo: https://github.com/CESNET/libyang.git
+    dest: /opt/libyang
+    version: v2.1.148
+
+- name: Build and install Libyang
+  shell: |
+    cd /opt/libyang
+    mkdir build
+    cd build
+    cmake ..
+    make
+    make install

@@ -1,0 +1,20 @@
+---
+- name: Install FRRouting
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Include common tasks
+      include_role:
+        name: common
+    
+    - name: Install CMake 
+      include_role:
+        name: cmake
+
+    - name: Install Libyang Library
+      include_role:
+        name: libyang
+
+    - name: Build FRRouting 
+      include_role:
+        name: frrouting

@@ -1,0 +1,22 @@
+---
+- name: Clone FRRouting repository
+  git:
+    repo: https://github.com/FRRouting/frr.git
+    dest: /opt/frr
+
+- name: Configure FRRouting
+  shell: |
+    cd /opt/frr
+    ./bootstrap.sh
+    ./configure
+    make
+
+- name: Build FRRouting
+  shell: |
+    cd /opt/frr
+    make
+
+- name: Install FRRouting
+  shell: |
+    cd /opt/frr
+    make install
